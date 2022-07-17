@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MusicAppMobile"
+             xmlns:vm="clr-namespace:MusicAppMobile.ViewModels"
+             xmlns:mm="clr-namespace:MediaManager.Player;assembly=MediaManager"
+             xmlns:vv="clr-namespace:MediaManager.Forms;assembly=MediaManager.Forms"
+             x:Class="MusicAppMobile.App" xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
+    <!--
+        Define global resources and styles here, that apply to all pages in your app.
+    -->
+    <Application.Resources>
+        <ResourceDictionary>
+            <!--<Color x:Key="Primary">#2196F3</Color>-->
+            <Style x:Key="titleText" TargetType="Label">
+                <Setter Property="TextColor" Value="#393939" />
+                <Setter Property="FontSize" Value="36" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+
+            <Style x:Key="playerbutton" TargetType="ImageButton">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="WidthRequest" Value="25" />
+                <Setter Property="HeightRequest" Value="25" />
+                <Setter Property="Margin" Value="3,0" />
+            </Style>
+            <ControlTemplate x:Key="CustomMediaElement">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="60"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="#03bf69" Margin="0,0,0,1">
+
+                        <StackLayout Orientation="Horizontal">
+                            <Frame Margin="10"
+                                            BorderColor="Black"
+                                            CornerRadius="200"
+                                            HeightRequest="60"
+                                            WidthRequest="0"
+                                            IsClippedToBounds="True"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center">
+                                <Image Source="n2.png"
+                                             Aspect="AspectFill"
+                                             Margin="-20"
+                                             HeightRequest="100"
+                                             WidthRequest="100" />
+                            </Frame>
+                            <StackLayout VerticalOptions="Center" Margin="20,0,30,0">
+                                <Label Text="me" TextColor="white" FontSize="22" FontAttributes="Bold"></Label>
+                                <Label Text="tác giả" TextColor="#9ae5c3" FontSize="11" FontAttributes="Bold"></Label>
+                            </StackLayout>
+                            <ImageButton x:Name="PART_Prev" Source="previousIcon.png"  Style="{StaticResource playerbutton}">
+                            </ImageButton>
+                            <ImageButton x:Name="PART_Play" Source="{Binding Source={RelativeSource AncestorType={x:Type local:CustomMediaElement }}, Path=PlayIcon}"  Style="{StaticResource playerbutton}">
+                            </ImageButton>
+                            <ImageButton  x:Name="PART_Next" Source="nextIcon.png"   Style="{StaticResource playerbutton}">
+                            </ImageButton>
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+            </ControlTemplate>
+            <Style TargetType="local:CustomMediaElement">
+                <Setter Property="ControlTemplate" Value="{StaticResource CustomMediaElement}">
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
